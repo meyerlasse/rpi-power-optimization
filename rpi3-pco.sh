@@ -74,7 +74,7 @@ echo "$LEDPWR_DISABLE_2=off" >> "$BOOT_CFG_FILE"
 
 # Disable Ethernet LEDs
 ETH_DIS_CMD="lan951x-led-ctl"
-ETH_DIS_SRV="pi3-disable-ethleds.service"
+ETH_DIS_SRV="rpi3-disable-ethleds.service"
 if ! type "$ETH_DIS_CMD"; then
 	apt-get install make gcc git libusb-1.0-0 libusb-1.0-0-dev && \
 	git clone https://github.com/meyerlasse/lan951x-led-ctl.git && \
@@ -87,7 +87,7 @@ fi
 
 "$ETH_DIS_CMD" --fdx=0 --lnk=0 --spd=0
 
-wget https://gist.githubusercontent.com/meyerlasse/a1ef2258ac2567c8ddb0670bc3d4f62c/raw/59e98ac3feab8a62deb45aea3fae11470c4191a0/pi3-disable-ethleds.service
+wget https://gist.githubusercontent.com/meyerlasse/eb40e32e7a84de1e6a6c2cb99837d069/raw/aa551b822a0f639e4c3924f779a50759558f1239/rpi3-disable-ethleds.service
 mv "$ETH_DIS_SRV" /etc/systemd/system
 systemctl enable "$ETH_DIS_SRV"
 systemctl start "$ETH_DIS_SRV"
