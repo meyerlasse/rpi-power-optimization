@@ -128,6 +128,7 @@ echo "$SPI_DISABLE=off" >> "$BOOT_CFG_FILE"
 # Set Ethernet speed to 10 Mb/s
 
 # Underclock CPU
+# No energy saving if model 3 or higher --> ARM optimizations good enough
 
 # Disable other unnecessary services & daemons
 systemctl disable avahi-daemon.service
