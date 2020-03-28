@@ -103,6 +103,28 @@ echo "" >> "$BOOT_CFG_FILE"
 echo "$AUDIO_DISABLE_CMT" >> "$BOOT_CFG_FILE"
 echo "$AUDIO_DISABLE=off" >> "$BOOT_CFG_FILE"
 
+# Disable I2C
+I2C_DISABLE="dtparam=i2c_arm"
+I2C_DISABLE_CMT="# Disable I2C"
+
+sed -i "/$I2C_DISABLE/d" "$BOOT_CFG_FILE"
+sed -i "/$I2C_DISABLE_CMT/d" "$BOOT_CFG_FILE"
+
+echo "" >> "$BOOT_CFG_FILE"
+echo "$I2C_DISABLE_CMT" >> "$BOOT_CFG_FILE"
+echo "$I2C_DISABLE=off" >> "$BOOT_CFG_FILE"
+
+# Disable SPI
+SPI_DISABLE="dtparam=spi"
+SPI_DISABLE_CMT="# Disable SPI"
+
+sed -i "/$SPI_DISABLE/d" "$BOOT_CFG_FILE"
+sed -i "/$SPI_DISABLE_CMT/d" "$BOOT_CFG_FILE"
+
+echo "" >> "$BOOT_CFG_FILE"
+echo "$SPI_DISABLE_CMT" >> "$BOOT_CFG_FILE"
+echo "$SPI_DISABLE=off" >> "$BOOT_CFG_FILE"
+
 # Underclock CPU
 
 # Disable other unnecessary services & daemons
