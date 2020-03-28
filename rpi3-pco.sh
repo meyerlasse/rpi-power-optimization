@@ -125,6 +125,8 @@ echo "" >> "$BOOT_CFG_FILE"
 echo "$SPI_DISABLE_CMT" >> "$BOOT_CFG_FILE"
 echo "$SPI_DISABLE=off" >> "$BOOT_CFG_FILE"
 
+# Set Ethernet speed to 10 Mb/s
+
 # Underclock CPU
 
 # Disable other unnecessary services & daemons
@@ -139,4 +141,5 @@ systemctl disable triggerhappy.socket
 
 # Boot optimization
 # - Add noarp to /etc/dhcpcd.conf
-# - Turn off splash screen in /boot/cmdline.txt (quiet splash)
+# - Turn off splash screen in /boot/cmdline.txt (remove splash, add quiet)
+# - Set boot-delay to 0
