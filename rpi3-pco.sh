@@ -45,8 +45,8 @@ echo "$BT_DISABLE" >> "$BOOT_CFG_FILE"
 #echo '1-1' | tee /sys/bus/usb/drivers/usb/unbind
 
 # Disable Activity LED
-LEDACT_DISABLE_1="dtparam=act_led_trigger=none"
-LEDACT_DISABLE_2="dtparam=act_led_activelow=off"
+LEDACT_DISABLE_1="dtparam=act_led_trigger"
+LEDACT_DISABLE_2="dtparam=act_led_activelow"
 LEDACT_DISABLE_CMT="# Disable Activity LED"
 
 sed -i "/$LEDACT_DISABLE_1/d" "$BOOT_CFG_FILE"
@@ -55,12 +55,12 @@ sed -i "/$LEDACT_DISABLE_CMT/d" "$BOOT_CFG_FILE"
 
 echo "" >> "$BOOT_CFG_FILE"
 echo "$LEDACT_DISABLE_CMT" >> "$BOOT_CFG_FILE"
-echo "$LEDACT_DISABLE_1" >> "$BOOT_CFG_FILE"
-echo "$LEDACT_DISABLE_2" >> "$BOOT_CFG_FILE"
+echo "$LEDACT_DISABLE_1=none" >> "$BOOT_CFG_FILE"
+echo "$LEDACT_DISABLE_2=off" >> "$BOOT_CFG_FILE"
 
 # Disable Power LED
-LEDPWR_DISABLE_1="dtparam=pwr_led_trigger=none"
-LEDPWR_DISABLE_2="dtparam=pwr_led_activelow=off"
+LEDPWR_DISABLE_1="dtparam=pwr_led_trigger"
+LEDPWR_DISABLE_2="dtparam=pwr_led_activelow"
 LEDPWR_DISABLE_CMT="# Disable Power LED"
 
 sed -i "/$LEDPWR_DISABLE_1/d" "$BOOT_CFG_FILE"
@@ -69,8 +69,8 @@ sed -i "/$LEDPWR_DISABLE_CMT/d" "$BOOT_CFG_FILE"
 
 echo "" >> "$BOOT_CFG_FILE"
 echo "$LEDPWR_DISABLE_CMT" >> "$BOOT_CFG_FILE"
-echo "$LEDPWR_DISABLE_1" >> "$BOOT_CFG_FILE"
-echo "$LEDPWR_DISABLE_2" >> "$BOOT_CFG_FILE"
+echo "$LEDPWR_DISABLE_1=none" >> "$BOOT_CFG_FILE"
+echo "$LEDPWR_DISABLE_2=off" >> "$BOOT_CFG_FILE"
 
 # Disable Ethernet LEDs
 ETH_DIS_CMD="lan951x-led-ctl"
@@ -93,7 +93,7 @@ systemctl enable "$ETH_DIS_SRV"
 systemctl start "$ETH_DIS_SRV"
 
 # Disable audio
-AUDIO_DISABLE="dtparam=audio=off"
+AUDIO_DISABLE="dtparam=audio"
 AUDIO_DISABLE_CMT="# Disable audio (snd_bcm2835)"
 
 sed -i "/$AUDIO_DISABLE/d" "$BOOT_CFG_FILE"
@@ -101,7 +101,7 @@ sed -i "/$AUDIO_DISABLE_CMT/d" "$BOOT_CFG_FILE"
 
 echo "" >> "$BOOT_CFG_FILE"
 echo "$AUDIO_DISABLE_CMT" >> "$BOOT_CFG_FILE"
-echo "$AUDIO_DISABLE" >> "$BOOT_CFG_FILE"
+echo "$AUDIO_DISABLE=off" >> "$BOOT_CFG_FILE"
 
 # Underclock CPU
 
