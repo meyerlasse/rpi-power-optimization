@@ -72,6 +72,8 @@ echo "$LEDPWR_DISABLE_CMT" >> "$BOOT_CFG_FILE"
 echo "$LEDPWR_DISABLE_1=none" >> "$BOOT_CFG_FILE"
 echo "$LEDPWR_DISABLE_2=off" >> "$BOOT_CFG_FILE"
 
+# TODO: Fix for Raspbian Buster
+
 # Disable Ethernet LEDs
 ETH_DIS_CMD="lan951x-led-ctl"
 ETH_DIS_SRV="rpi3-disable-ethleds.service"
@@ -87,7 +89,7 @@ fi
 
 "$ETH_DIS_CMD" --fdx=0 --lnk=0 --spd=0
 
-wget https://gist.githubusercontent.com/meyerlasse/eb40e32e7a84de1e6a6c2cb99837d069/raw/aa551b822a0f639e4c3924f779a50759558f1239/rpi3-disable-ethleds.service
+wget https://gist.githubusercontent.com/meyerlasse/eb40e32e7a84de1e6a6c2cb99837d069/raw/a24b6cde2677859dbd00bea78abb71f67204d0a8/rpi3-disable-ethleds.service
 mv "$ETH_DIS_SRV" /etc/systemd/system
 systemctl enable "$ETH_DIS_SRV"
 systemctl start "$ETH_DIS_SRV"
