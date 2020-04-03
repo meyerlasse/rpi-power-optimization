@@ -76,7 +76,7 @@ echo "$LEDPWR_DISABLE_2=off" >> "$BOOT_CFG_FILE"
 ETH_DIS_CMD="lan951x-led-ctl"
 ETH_DIS_SRV="rpi3-disable-ethleds.service"
 if ! type "$ETH_DIS_CMD"; then
-	apt-get install make gcc git libusb-1.0-0 libusb-1.0-0-dev && \
+	apt-get --yes install make gcc git libusb-1.0-0 libusb-1.0-0-dev && \
 	git clone https://github.com/meyerlasse/lan951x-led-ctl.git && \
 	cd "$ETH_DIS_CMD" && \
 	make && \
