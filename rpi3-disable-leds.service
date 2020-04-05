@@ -1,0 +1,13 @@
+[Unit]
+Description=Disable Power and Activity LEDs
+Wants=network.target
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/rpi3-disable-leds.sh
+RemainAfterExit=true
+StandardOutput=journal
+
+[Install]
+WantedBy=multi-user.target

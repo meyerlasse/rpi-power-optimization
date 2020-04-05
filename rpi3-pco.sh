@@ -45,34 +45,40 @@ echo "$BT_DISABLE" >> "$BOOT_CFG_FILE"
 #echo '1-1' | tee /sys/bus/usb/drivers/usb/unbind
 
 # Disable Activity LED
-LEDACT_DISABLE_1="dtparam=act_led_trigger"
-LEDACT_DISABLE_2="dtparam=act_led_activelow"
-LEDACT_DISABLE_CMT="# Disable Activity LED"
+#LEDACT_DISABLE_1="dtparam=act_led_trigger"
+#LEDACT_DISABLE_2="dtparam=act_led_activelow"
+#LEDACT_DISABLE_CMT="# Disable Activity LED"
 
-sed -i "/$LEDACT_DISABLE_1/d" "$BOOT_CFG_FILE"
-sed -i "/$LEDACT_DISABLE_2/d" "$BOOT_CFG_FILE"
-sed -i "/$LEDACT_DISABLE_CMT/d" "$BOOT_CFG_FILE"
+#sed -i "/$LEDACT_DISABLE_1/d" "$BOOT_CFG_FILE"
+#sed -i "/$LEDACT_DISABLE_2/d" "$BOOT_CFG_FILE"
+#sed -i "/$LEDACT_DISABLE_CMT/d" "$BOOT_CFG_FILE"
 
-echo "" >> "$BOOT_CFG_FILE"
-echo "$LEDACT_DISABLE_CMT" >> "$BOOT_CFG_FILE"
-echo "$LEDACT_DISABLE_1=none" >> "$BOOT_CFG_FILE"
-echo "$LEDACT_DISABLE_2=off" >> "$BOOT_CFG_FILE"
+#echo "" >> "$BOOT_CFG_FILE"
+#echo "$LEDACT_DISABLE_CMT" >> "$BOOT_CFG_FILE"
+#echo "$LEDACT_DISABLE_1=none" >> "$BOOT_CFG_FILE"
+#echo "$LEDACT_DISABLE_2=off" >> "$BOOT_CFG_FILE"
 
 # Disable Power LED
-LEDPWR_DISABLE_1="dtparam=pwr_led_trigger"
-LEDPWR_DISABLE_2="dtparam=pwr_led_activelow"
-LEDPWR_DISABLE_CMT="# Disable Power LED"
+#LEDPWR_DISABLE_1="dtparam=pwr_led_trigger"
+#LEDPWR_DISABLE_2="dtparam=pwr_led_activelow"
+#LEDPWR_DISABLE_CMT="# Disable Power LED"
 
-sed -i "/$LEDPWR_DISABLE_1/d" "$BOOT_CFG_FILE"
-sed -i "/$LEDPWR_DISABLE_2/d" "$BOOT_CFG_FILE"
-sed -i "/$LEDPWR_DISABLE_CMT/d" "$BOOT_CFG_FILE"
+#sed -i "/$LEDPWR_DISABLE_1/d" "$BOOT_CFG_FILE"
+#sed -i "/$LEDPWR_DISABLE_2/d" "$BOOT_CFG_FILE"
+#sed -i "/$LEDPWR_DISABLE_CMT/d" "$BOOT_CFG_FILE"
 
-echo "" >> "$BOOT_CFG_FILE"
-echo "$LEDPWR_DISABLE_CMT" >> "$BOOT_CFG_FILE"
-echo "$LEDPWR_DISABLE_1=none" >> "$BOOT_CFG_FILE"
-echo "$LEDPWR_DISABLE_2=off" >> "$BOOT_CFG_FILE"
+#echo "" >> "$BOOT_CFG_FILE"
+#echo "$LEDPWR_DISABLE_CMT" >> "$BOOT_CFG_FILE"
+#echo "$LEDPWR_DISABLE_1=none" >> "$BOOT_CFG_FILE"
+#echo "$LEDPWR_DISABLE_2=off" >> "$BOOT_CFG_FILE"
 
-# TODO: Fix for Raspbian Buster
+# Disable Power and Activity LEDs on Raspbian Buster
+if ! service rpi3-disable-leds status; then
+	cp ./rpi3-disable-leds.sh /usr/local/bin
+	cp ./rpi3-disable-leds.service /etc/systemd/system
+	systemctl enable rpi3-disable-leds.service
+	service rpi3-disable-leds start
+fi
 
 # Disable Ethernet LEDs
 ETH_DIS_CMD="lan951x-led-ctl"
